@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Rnd } from "react-rnd";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosAddCircle } from "react-icons/io";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 
 function Home() {
+
+  const [wActive, setwActive] = useState(false);
+
+  // For Widgets
   const defaultWidgets = [
     { id: 1, x: 100, y: 100, width: 200, height: 100, content: "🕒 Clock" },
     { id: 2, x: 400, y: 150, width: 250, height: 150, content: "📁 Quick Links" },
@@ -85,33 +89,46 @@ function Home() {
         ))}
       </div>
 
-      {/* Floating Controls */}
-      {/* <div className="fixed bottom-5 right-5 flex flex-col gap-3">
-        <button
-          onClick={addWidget}
-          className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white backdrop-blur-md shadow-md border border-white/20 transition-all duration-200"
-        >
-          ➕ Add Widget
-        </button>
-
-        <button
-          onClick={resetLayout}
-          className="px-4 py-2 rounded-xl bg-red-500/70 hover:bg-red-500 text-white shadow-md transition-all duration-200"
-        >
-          ♻️ Reset Layout
-        </button>
-      </div> */}
-
+      {/* Floating Controles */}
       <div className="flex gap-2 fixed bottom-5 right-5">
+        <div
+        onClick={()=>{setwActive(!wActive)}}
+        className="flex items-center justify-center
+        p-3 bg-white rounded-full
+        cursor-pointer hover:scale-110 duration-300
+        relative z-30
+        ">
 
-        <div className="flex items-center justify-center p-3 bg-white rounded-full cursor-pointer hover:scale-110 duration-300">
-
-          <IoIosArrowBack />
+          <IoIosArrowBack
+          className={`${wActive? "rotate-180": "rotate-0"} duration-300`} />
 
         </div>
 
-        <div className="flex items-center justify-center p-3 bg-red-500/30 rounded-full cursor-pointer hover:scale-110 duration-300">
-          <FaArrowRotateLeft className="text-red-600/90" />
+        {/* Widgets Options */}
+        <div
+          className={`absolute duration-300 z-20 flex items-center justify-center
+          bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-0 opacity-0"}
+          min-w-30 h-10 bg-white rounded-lg`}>
+
+            {/* Add Widget */}
+            <IoIosAddCircle
+            onClick={addWidget}
+            className="text-2xl duration-300 cursor-pointer hover:text-green-600"/>
+
+        </div>
+
+            {/* Reset Layout */}
+        <div
+          onClick={resetLayout}
+          className="flex items-center justify-center p-3 bg-red-500/30 rounded-full
+                    cursor-pointer hover:scale-110 transition-all duration-300 z-20">
+          <FaArrowRotateLeft
+            className="text-red-600/90"
+            onClick={(e) => {
+              e.stopPropagation(); // prevents double-trigger if you had nested logic
+              resetLayout();
+            }}
+          />
         </div>
 
       </div>
