@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Rnd } from "react-rnd";
 import { IoIosArrowBack, IoIosAddCircle } from "react-icons/io";
 import { FaArrowRotateLeft } from "react-icons/fa6";
+import { FaClock } from "react-icons/fa";
+import { IoLinkSharp } from "react-icons/io5";
+
+import ClockWidget from "../components/widgets/ClockWidget";
+import QuickLinksWidget from "../components/widgets/QuickLinksWidget";
 
 function Home() {
 
@@ -9,10 +14,9 @@ function Home() {
 
   // For Widgets
   const defaultWidgets = [
-    { id: 1, x: 100, y: 100, width: 200, height: 100, content: "🕒 Clock" },
-    { id: 2, x: 400, y: 150, width: 250, height: 150, content: "📁 Quick Links" },
+    { id: 1, type: "clock", x: 100, y: 100, width: 200, height: 100 },
+    { id: 2, type: "links", x: 400, y: 150, width: 250, height: 150 },
   ];
-
   const [widgets, setWidgets] = useState(null);
 
   // Load widgets from localStorage on mount
@@ -41,14 +45,14 @@ function Home() {
   };
 
   // Add new widget dynamically
-  const addWidget = () => {
+  const addWidget = (type = "custom") => {
     const newWidget = {
       id: Date.now(),
+      type,
       x: 200,
       y: 200,
-      width: 220,
-      height: 120,
-      content: "✨ New Widget",
+      width: 250,
+      height: 150,
     };
     setWidgets((prev) => [...prev, newWidget]);
   };
@@ -81,10 +85,10 @@ function Home() {
             }
             className="bg-white/10 backdrop-blur-md rounded-2xl p-3 shadow-md border border-white/20 text-center cursor-move hover:bg-white/15"
           >
-            <div className="font-semibold text-sm mb-2 border-b border-white/10 pb-1">
-              {w.content}
-            </div>
-            <div className="text-xs text-white/60">Drag or resize me</div>
+            {/* Widget Renderer */}
+            {w.type === "clock" && <ClockWidget />}
+            {w.type === "links" && <QuickLinksWidget />}
+            {w.type === "custom" && <div>🌈 Your new custom widget here!</div>}
           </Rnd>
         ))}
       </div>
@@ -106,14 +110,18 @@ function Home() {
 
         {/* Widgets Options */}
         <div
-          className={`absolute duration-300 z-20 flex items-center justify-center
+          className={`absolute duration-300 z-20 flex items-center justify-center gap-4
           bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-[100px] opacity-0"}
           min-w-30 h-10 bg-white rounded-lg`}>
 
             {/* Add Widget */}
-            <IoIosAddCircle
-            onClick={addWidget}
-            className="text-2xl duration-300 cursor-pointer hover:text-green-600"/>
+            <FaClock
+            onClick={() => addWidget("clock")}
+            className="text-xl duration-300 cursor-pointer hover:text-green-600"/>
+
+            <IoLinkSharp
+            onClick={() => addWidget("links")}
+            className="text-2xl duration-300 cursor-pointer hover:text-blue-600"/>
 
         </div>
 

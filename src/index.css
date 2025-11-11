@@ -7,8 +7,16 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: "Getboreg";
+  src: url("/assets/fonts/getboreg/GetboregTrialOnly-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 @theme{
   --font-Moonrising: "Moonrising", sans-serif;
+  --font-Getboreg: "Getboreg", sans-serif;
   --font-Poppins: "Poppins", sans-serif;
 }
 
