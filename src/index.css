@@ -1,9 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Moonrising";
+  src: url("/assets/fonts/moonrising/Moonrising.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@theme{
+  --font-Moonrising: "Moonrising", sans-serif;
+  --font-Poppins: "Poppins", sans-serif;
+}
+
 .starterDiv{
-  @apply min-h-[100dvh] flex items-center justify-center text-4xl;
+  @apply min-h-[100dvh] flex items-center justify-center;
 }
 
 .mainDiv{
-  @apply bg-black text-white min-h-[100dvh] w-full overflow-x-hidden;
+  @apply min-h-[100dvh] w-full overflow-x-hidden;
 }
