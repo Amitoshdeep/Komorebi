@@ -107,7 +107,7 @@ function Home() {
         {/* Widgets Options */}
         <div
           className={`absolute duration-300 z-20 flex items-center justify-center
-          bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-0 opacity-0"}
+          bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-[100px] opacity-0"}
           min-w-30 h-10 bg-white rounded-lg`}>
 
             {/* Add Widget */}
@@ -124,10 +124,6 @@ function Home() {
                     cursor-pointer hover:scale-110 transition-all duration-300 z-20">
           <FaArrowRotateLeft
             className="text-red-600/90"
-            onClick={(e) => {
-              e.stopPropagation(); // prevents double-trigger if you had nested logic
-              resetLayout();
-            }}
           />
         </div>
 
