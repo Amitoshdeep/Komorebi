@@ -110,7 +110,7 @@ function Home() {
 
         {/* Widgets Options */}
         <div
-          className={`absolute duration-300 z-20 flex items-center justify-center gap-4
+          className={`absolute duration-300 z-20 flex items-center justify-center gap-4 px-3
           bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-[100px] opacity-0"}
           min-w-30 h-10 bg-white rounded-lg`}>
 
@@ -123,17 +123,24 @@ function Home() {
             onClick={() => addWidget("links")}
             className="text-2xl duration-300 cursor-pointer hover:text-blue-600"/>
 
+            <div className="pl-2  border-l-[1px] border-red-600/20">
+
+            <FaArrowRotateLeft
+            onClick={resetLayout}
+              className="text-red-600/90 cursor-pointer"
+            />
+            </div>
         </div>
 
             {/* Reset Layout */}
-        <div
+        {/* <div
           onClick={resetLayout}
           className="flex items-center justify-center p-3 bg-red-500/30 rounded-full
                     cursor-pointer hover:scale-110 transition-all duration-300 z-20">
           <FaArrowRotateLeft
             className="text-red-600/90"
           />
-        </div>
+        </div> */}
 
       </div>
 
