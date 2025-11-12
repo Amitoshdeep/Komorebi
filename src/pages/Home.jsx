@@ -11,6 +11,7 @@ import QuickLinksWidget from "../components/widgets/QuickLinksWidget";
 function Home() {
 
   const [wActive, setwActive] = useState(false);
+  const [supActive, setsupActive] = useState(false);
 
   // For Widgets
   const defaultWidgets = [
@@ -166,12 +167,22 @@ function Home() {
 
         {/* Supporrt */}
         <div
-          // onClick={resetLayout}
+          onClick={()=>{setsupActive(!supActive)}}
           className="flex items-center justify-center p-3 bg-red-500/30 rounded-full
                     cursor-pointer hover:scale-110 transition-all duration-300 z-20">
           <FaRegHeart
             className="text-red-600/90"
           />
+          {/* Support Block */}
+          <AnimatePresence>
+            {
+              supActive && (
+                <motion.div>
+
+                </motion.div>
+              )
+            }
+          </AnimatePresence>
         </div>
 
       </div>
