@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Rnd } from "react-rnd";
 import { IoIosArrowBack, IoIosAddCircle } from "react-icons/io";
 import { FaArrowRotateLeft } from "react-icons/fa6";
-import { FaClock } from "react-icons/fa";
+import { FaClock, FaRegHeart } from "react-icons/fa";
 import { IoLinkSharp } from "react-icons/io5";
 
 import ClockWidget from "../components/widgets/ClockWidget";
@@ -127,20 +127,20 @@ function Home() {
 
             <FaArrowRotateLeft
             onClick={resetLayout}
-              className="text-red-600/90 cursor-pointer"
+              className="text-red-600/90 cursor-pointer duration-300 hover:scale-110"
             />
             </div>
         </div>
 
-            {/* Reset Layout */}
-        {/* <div
-          onClick={resetLayout}
+        {/* Supporrt */}
+        <div
+          // onClick={resetLayout}
           className="flex items-center justify-center p-3 bg-red-500/30 rounded-full
                     cursor-pointer hover:scale-110 transition-all duration-300 z-20">
-          <FaArrowRotateLeft
+          <FaRegHeart
             className="text-red-600/90"
           />
-        </div> */}
+        </div>
 
       </div>
 
