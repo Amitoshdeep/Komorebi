@@ -4,7 +4,7 @@ import { IoIosArrowBack, IoIosAddCircle } from "react-icons/io";
 import { FaArrowRotateLeft } from "react-icons/fa6";
 import { FaClock, FaRegHeart } from "react-icons/fa";
 import { IoLinkSharp } from "react-icons/io5";
-
+import { motion, AnimatePresence } from "framer-motion";
 import ClockWidget from "../components/widgets/ClockWidget";
 import QuickLinksWidget from "../components/widgets/QuickLinksWidget";
 
@@ -104,33 +104,65 @@ function Home() {
         ">
 
           <IoIosArrowBack
-          className={`${wActive? "rotate-180": "rotate-0"} duration-300`} />
+          className={`${wActive? "rotate-90": "rotate-0"} duration-300`} />
 
         </div>
 
         {/* Widgets Options */}
-        <div
-          className={`absolute duration-300 z-20 flex items-center justify-center gap-4 px-3
-          bottom-5 top-1/2 -translate-y-1/2 ${wActive? "translate-x-[-130px] opacity-100": "translate-x-[100px] opacity-0"}
-          min-w-30 h-10 bg-white rounded-lg`}>
+        <AnimatePresence>
+          {wActive && (
+            <motion.div
+              initial={{ scale: 0.6, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.6, opacity: 0, y: 20 }}
+              transition={{
+                type: "spring",
+                stiffness: 200,
+                damping: 18,
+                duration: 0.25,
+              }}
+              className="absolute z-20 flex items-center justify-center gap-4 px-3
+                        bottom-5 top-1/2 -translate-y-1/2 right-24
+                        min-w-30 h-10 bg-white rounded-lg shadow-md"
+            >
+              {/* Add Clock Widget */}
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <FaClock
+                  onClick={() => addWidget("clock")}
+                  className="text-xl text-gray-700 cursor-pointer hover:text-green-600"
+                />
+              </motion.div>
 
-            {/* Add Widget */}
-            <FaClock
-            onClick={() => addWidget("clock")}
-            className="text-xl duration-300 cursor-pointer hover:text-green-600"/>
+              {/* Add Quick Links Widget */}
+              <motion.div
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                <IoLinkSharp
+                  onClick={() => addWidget("links")}
+                  className="text-2xl text-gray-700 cursor-pointer hover:text-blue-600"
+                />
+              </motion.div>
 
-            <IoLinkSharp
-            onClick={() => addWidget("links")}
-            className="text-2xl duration-300 cursor-pointer hover:text-blue-600"/>
-
-            <div className="pl-2  border-l-[1px] border-red-600/20">
-
-            <FaArrowRotateLeft
-            onClick={resetLayout}
-              className="text-red-600/90 cursor-pointer duration-300 hover:scale-110"
-            />
-            </div>
-        </div>
+              {/* Divider + Reset */}
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="pl-2 border-l border-red-600/20"
+              >
+                <FaArrowRotateLeft
+                  onClick={resetLayout}
+                  className="text-red-600/90 cursor-pointer duration-300 hover:scale-110"
+                />
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Supporrt */}
         <div
